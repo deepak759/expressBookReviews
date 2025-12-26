@@ -22,7 +22,7 @@ public_users.post("/register", (req, res) => {
 
 // Get the list of all books
 public_users.get('/', (req, res) => {
-    return res.status(200).json(JSON.stringify(books, null, 4));
+    return res.send(JSON.stringify(books, null, 4));
 });
 
 // Get book details based on ISBN
@@ -30,9 +30,9 @@ public_users.get('/isbn/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
     if (books[isbn]) {
-        return res.status(200).json(JSON.stringify(books[isbn], null, 4));
+        return res.send(JSON.stringify(books[isbn], null, 4));
     } else {
-        return res.status(404).json({ message: "Book not found" });
+        return res.send({ message: "Book not found" });
     }
 });
 
@@ -42,9 +42,9 @@ public_users.get('/author/:author', (req, res) => {
     const filteredBooks = Object.values(books).filter(book => book.author.toLowerCase() === author);
 
     if (filteredBooks.length > 0) {
-        return res.status(200).json(JSON.stringify(filteredBooks, null, 4));
+        return res.send(JSON.stringify(filteredBooks, null, 4));
     } else {
-        return res.status(404).json({ message: "No books found by this author" });
+        return res.send({ message: "No books found by this author" });
     }
 });
 
@@ -54,9 +54,9 @@ public_users.get('/title/:title', (req, res) => {
     const filteredBooks = Object.values(books).filter(book => book.title.toLowerCase() === title);
 
     if (filteredBooks.length > 0) {
-        return res.status(200).json(JSON.stringify(filteredBooks, null, 4));
+        return res.send(JSON.stringify(filteredBooks, null, 4));
     } else {
-        return res.status(404).json({ message: "No books found with this title" });
+        return res.send({ message: "No books found with this title" });
     }
 });
 
@@ -65,9 +65,9 @@ public_users.get('/review/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
     if (books[isbn]) {
-        return res.status(200).json(JSON.stringify(books[isbn].reviews, null, 4));
+        return res.send(JSON.stringify(books[isbn].reviews, null, 4));
     } else {
-        return res.status(404).json({ message: "Book not found" });
+        return res.send({ message: "Book not found" });
     }
 });
 
